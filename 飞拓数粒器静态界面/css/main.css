@@ -1,0 +1,55 @@
+#apDiv1{
+    background-color: beige;
+    width: 100%;
+    color: #999;
+}
+
+#apDiv2{
+    position: absolute;
+    top:17%;
+    font-size: 30px;
+}
+#apDiv3{
+    background-color: deepskyblue;
+    font-family: cursive;
+    font-size: 20px;
+}
+#apDiv4{
+    position: relative;
+    left:60%;
+    top:auto;
+}
+#apDiv5{
+    position: relative;
+    top:50%;
+}
+#img1{
+	width: 49%;
+	height: 170px;
+}
+#img2{
+	width: 50%;
+	height: 170px;
+}
+table a{
+    color:black;
+}
+#apDiv6{
+    position:absolute;
+    left: 74%;
+    top:39%;
+}
+#apDiv7{
+    font-family: cursive;
+}
+#download{
+    position: absolute;
+    left:40%;
+    top:65%;   
+}
+#ans{
+    position: fixed;
+    top:30%;
+    left:35%;
+    z-index: 3;
+}

@@ -1,0 +1,28 @@
+#apDiv1{
+    background-color: beige;
+}
+
+#apDiv1 p{
+    color: red;
+    position: absolute;
+    top:1%;
+    left:30%;
+    font-size: 18px;
+}
+#apDiv2{
+    position: absolute;
+    top:17%;
+    font-size: 30px;
+}
+#apDiv3{
+    background-color: deepskyblue; 
+}
+#apDiv4{
+    position: relative;
+    left:60%;
+    top:auto;
+}
+#apDiv5{
+    position: relative;
+    top:50%;
+}

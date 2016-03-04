@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equip="content-type" content="discuss/html;charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+        <title>飞拓数粒器 - 论坛 - 四川飞拓有限公司</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript">
+$(document).ready(function(){
+	
+	//how much items per page to show
+	var show_per_page = 5; 
+	//getting the amount of elements inside content div
+	var number_of_items = $('#apDiv5 tr').length;
+	//calculate the number of pages we are going to have
+	var number_of_pages = Math.ceil(number_of_items/show_per_page);
+	
+	//set the value of our hidden input fields
+	$('#current_page').val(0);
+	$('#show_per_page').val(show_per_page);
+	
+	//now when we got all we need for the navigation let's make it '
+	
+	/* 
+	what are we going to have in the navigation?
+		- link to previous page
+		- links to specific pages
+		- link to next page
+	*/
+	var navigation_html = '<a class="previous_link" href="javascript:previous();">Prev</a>';
+	var current_link = 0;
+	while(number_of_pages > current_link){
+		navigation_html += '<a class="page_link" href="javascript:go_to_page(' + current_link +')" longdesc="' + current_link +'">'+ (current_link + 1) +'</a>';
+		current_link++;
+	}
+	navigation_html += '<a class="next_link" href="javascript:next();">Next</a>';
+	
+	$('#page_navigation').html(navigation_html);
+	
+	//add active_page class to the first page link
+	$('#page_navigation .page_link:first').addClass('active_page');
+	
+	//hide all the elements inside content div
+	$('#content').children().css('display', 'none');
+	
+	//and show the first n (show_per_page) elements
+	$('#content').children().slice(0, show_per_page).css('display', 'block');
+	
+});
+
+function previous(){
+	
+	new_page = parseInt($('#current_page').val()) - 1;
+	//if there is an item before the current active link run the function
+	if($('.active_page').prev('.page_link').length==true){
+		go_to_page(new_page);
+	}
+	
+}
+
+function next(){
+	new_page = parseInt($('#current_page').val()) + 1;
+	//if there is an item after the current active link run the function
+	if($('.active_page').next('.page_link').length==true){
+		go_to_page(new_page);
+	}
+	
+}
+function go_to_page(page_num){
+	//get the number of items shown per page
+	var show_per_page = parseInt($('#show_per_page').val());
+	
+	//get the element number where to start the slice from
+	start_from = page_num * show_per_page;
+	
+	//get the element number where to end the slice
+	end_on = start_from + show_per_page;
+	
+	//hide all children elements of content div, get specific items and show them
+	$('#content').children().css('display', 'none').slice(start_from, end_on).css('display', 'block');
+	
+	/*get the page link that has longdesc attribute of the current page and add active_page class to it
+	and remove that class from previously active page link*/
+	$('.page_link[longdesc=' + page_num +']').addClass('active_page').siblings('.active_page').removeClass('active_page');
+	
+	//update the current page input field
+	$('#current_page').val(page_num);
+}
+  
+</script>
+        <style>
+             #page_navigation a{
+	         padding:5px;
+             border: 1px solid black;
+	         border-radius:3px;
+	         margin:3px;
+	         color: darkgreen;
+	         text-decoration:none
+          }
+             .active_page{
+	         background-color: deepskyblue;
+	         color:white !important;
+          }
+         </style>
+    </head>
+    <body>
+        <input type='hidden' id='current_page' />
+	    <input type='hidden' id='show_per_page' />
+       <div class="container-fluid">
+       <div class="nav navbar nav-tabs" role="navigation">
+          <ul id="apDiv1" class="nav navbar-nav">
+             <li><a href="#">注册</a></li>
+             <li><a href="#">登录</a></li>
+             <li><a href="#">加入收藏</a></li>
+              <li class="navbar-text" style="color:red;position:absolute;left:30%;">公告：飞拓数粒器1.0版本已发布，欢迎大家下载，望提出宝贵意见！</li>
+              <li class="dropdown" style="position:absolute;left:90%;">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">用户名<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                            <li><a href="#">登出</a></li>
+                      </ul>
+              </li>
+            </ul>
+        </div>
+    </div>
+        <div class="container">
+            <div><img src="pic/23123.gif">
+                <strong id="apDiv2">开拓未来，联动你我</strong>
+            </div>
+            <br>
+            <ul id="apDiv3" class="nav nav-tabs">
+                <li role="navigation"><a href="First.html">数粒器首页</a></li>
+                <li role="navigation"><a href="section.html">论坛首页</a></li>
+                <li role="navigation"><a href="discuss.html">技术交流</a></li>
+                <li role="navigation"  class="active"><a href="#">问题反馈</a></li>
+            </ul>
+            <img src="img/house.png" style="width:20px;">&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;论坛
+            <br><br>
+            <table class="table-bordered table-responsive">
+                <thead>
+                    <th width="330" height="30" bgcolor="#0099FF" scope="col">今日发帖数</th>
+                    <th width="330" bgcolor="#0099FF" scope="col">总发帖数</th>
+                    <th width="330" bgcolor="#0099FF" scope="col">总用户数</th>
+                </thead>
+                <tr style="font-size:25px; color:red;">
+                    <td align="center" width="330" height="50" bgcolor="#FFFFCC" scope="col">12</td>
+                    <td align="center" bgcolor="#FFFFCC" scope="col">1204</td>
+                    <td align="center" bgcolor="#FFFFCC" scope="col">3600</td>
+                </tr>
+            </table>
+            <br><br>
+            <div id="apDiv4" style="width:300px"><a href="send.html"><img class="img-responsive" src="img/title.png"></a></div>
+            
+            <br><br>
+            <div id="apDiv5" class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th width="550" height="20" bgcolor="#0099FF" scope="col">主题</th>
+                        <th width="98" height="20" bgcolor="#0099FF" scope="col">作者</th>
+                        <th width="77" height="20" bgcolor="#0099FF" scope="col">回复数</th>
+                        <th width="145" height="20" bgcolor="#0099FF" scope="col">时间</th>
+                    </tr>
+                    <tr>
+                        <td height="40" align="left" bgcolor="#FFFFCC"><a href="posts.html">闭起双眼我最挂念谁，眼睛张开身边竟是谁。</a></td>
+                        <td height="40" align="center" bgcolor="#CCFFCC">sb1</td>
+                        <td height="40" align="center" bgcolor="#FFFFCC">2</td>
+                        <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:00</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">为何旧知己，在最后变不到老友。来年陌生的，是昨日最亲的某某</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb2</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">3</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:01</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">难离难舍想抱紧些，茫茫人生好象荒野。如孩儿能伏于爸爸的肩膊，哪怕遥遥长路多斜</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb3</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">4</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:02</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">若沉默似金，还谈什么恋爱，宁愿在发声机器面前笑着忙。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb4</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">5</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:03</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">应该怎麽爱，可惜书里从没记载。终於摸出来，但岁月却不回来，错的爱，乃必经的配菜。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb5</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">6</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:04</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">我一再试探你一再隐瞒，有一种预感想挽回太难，对你还有无可救药的期盼，我坐立难安望眼欲穿。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb6</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">7</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:05</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">应该怎麽爱，可惜书里从没记载。终於摸出来，但岁月却不回来，错的爱，乃必经的配菜。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb7</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">8</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:06</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">请你说我们为何变成陌路人的模样，请你说还有什么比沉默更难堪，难道互相隐藏，就能避免了失望。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb8</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">9</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:07</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">原来爱情的世界很大，塞了多少幸福还是有空虚。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb9</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">10</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:08</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">拥不拥有也会记住谁，快不快乐有天总过去。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb10</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">11</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:09</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">爱是怀疑，爱是妒忌，爱是种近乎幻想的真理。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb11</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">12</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:10</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">原谅我不再送花，伤口应要结巴，花瓣铺满心里坟场才害怕。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb12</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">13</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:11</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">若只是喜欢，何必夸张成爱。——林夕</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb13</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">14</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:12</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">你是千堆雪我是长街，怕日出一到彼此瓦解。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb14</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">15</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:13</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">谁能告诉我，要有多<a href="http://www.lz13.cn/mingrenmingyan/8754.html">坚强</a>，才敢念念不忘</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb15</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">16</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:14</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">我愿意做你的老师，示范着执子之手如何解释，不愿为深奥的感情变白痴。——《诗人的情人》方大同</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb16</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">17</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:15</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">在有生的瞬间能遇到你，竟花光所有运气。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb17</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">18</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:16</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">但凡未得到，但凡是过去，总是最登对。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb18</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">19</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:17</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">爱若难以放进手里，何不将这双手放进心里。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb19</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">20</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:18</td>
+    </tr>
+    <tr>
+      <td height="40" align="left" bgcolor="#FFFFCC">闭起双眼我最挂念谁眼睛张开身边竟是谁。</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">sb20</td>
+      <td height="40" align="center" bgcolor="#FFFFCC">21</td>
+      <td height="40" align="center" bgcolor="#CCFFCC">2015-07-24 16:19</td>
+    </tr>
+                </table>
+            </div>
+        </div> 
+        <div id='page_navigation' class="pager pagination"></div><br>
+        <br><br>
+        <div class="container-fluid" style="background-color:skyblue; text-align:center;">
+            <h3>四川飞拓有限公司草莓团队出品</h3>
+        </div>
+       
+        <script src="js/bootstrap.min.js"></script>
+        <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    </body>
+</html>
